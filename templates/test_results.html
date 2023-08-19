@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+    <h1>{{testresult.score}}/{{testresult.test.Test.all.count}}</h1>
+    <div class="">
+        {% for i in  quiz_answers %}
+        <div class="row">
+            <div class="mb-3 col-11">
+                <h2 class="d-inline">Q. </h2>
+                <h4 class="d-inline">{{i.question.question}}</h4>
+            </div>
+            <div class="col-1">
+                {% if i.is_correct %}
+                <h4 class="text-success">+1</h4>
+                {% else %}
+                <h4 class="text-danger">-1</h4>
+                {% endif %}
+            </div>
+        </div>
+        <div class="ms-5">
+        {% for choice in i.question.choices.all%}
+            {% if choice.is_correct%}
+            <h4 class="text-success">{{choice.choice}}</h4>
+            {% elif i.selected_choice.id == choice.id and not i.is_correct%}
+            <h4 class="text-danger">{{choice.choice}}</h4>
+            {% else %}
+            <h4>{{choice.choice}}</h4>
+            {% endif %}
+            {% endfor %}
+            <hr class="hr">
+        </div>
+    {% endfor %}
+    </div>
+</div>
+
+    
+{% endblock body %}

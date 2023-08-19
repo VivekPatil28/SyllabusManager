@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="container-fluid">
+    <div class="card shadow py-2 ">
+        <div class="row mt-5">
+            <div class="col">
+                <h1 class="text-center">Test Name : Java Programming</h1>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col">
+                <h6>
+                    <ul type="square" class="text-danger">
+                        <li class="list-item">Users is allowed to attempt the test only once.</li>
+                        <li class="list-item">Each question can be visited and answered only once.</li>
+                        <li class="list-item">The order of questions is randomized for different users.</li>
+                        <li class="list-item">After completing the test, users receive a summary of their results, including the total number of correct and incorrect answers.</li>
+                        <li class="list-item">Users can review their answers after submitting the entire test.</li>
+                        <li class="list-item">Once the test begins, users cannot pause or close the browser until the test is completed.</li>
+                    </ul>
+                </h6>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <form action="/starttest" method="post">
+                        {% csrf_token %}
+                        <input type="text" value="{{test.id}}" name="testid" hidden>
+                        <input class="btn btn-primary btn-gradient" type="submit" value="Start Test">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

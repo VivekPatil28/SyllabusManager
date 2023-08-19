@@ -1,0 +1,194 @@
+{% extends 'base.html' %}   
+{% load custom_tags %}
+{% block body %}
+<div class="container-fluid">
+
+<div id="wrapper" class="container pt-5">
+    <div class="container-fluid">
+        <div class="row">
+            {% for sub in Subjects %}
+                <div class="col-xl-4 col-md-6 mb-4" >
+                    <div class="card shadow h-100 py-2 " style="border-left:6px solid red;">
+                        <div class="card-body">
+                            <h5 class="font-weight-bold text-uppercase mb-1 text-danger" style="min-height:60px;">{{sub.name}}</h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class=" h5 mb-0 font-weight-bold text-gray-800">{% calculate_syllabus_coverage sub request.user %}%</div>
+                                <a type="button" href="roadmap/{{sub.name}}" class="btn btn-success btn-sm">Continue Studying</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+        <div class="mt-5 ">
+            <h5 class="text-center p-2 shadow mb-5 rounded-2 py-3">{{quote.get_random_quote}}</h5>
+        </div>
+
+            <!-- Area Chart -->
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-success">Syllabus Covered</h6>
+                        </div>
+                        <div class="card-body">
+                             {% for sub in Subjects %}
+                                <h4 class="small font-weight-bold">{{sub.name}} <span class="float-right"> {% calculate_syllabus_coverage sub request.user %}%</span>
+                                </h4>
+                                <div class="progress bg-dark-subtle mb-4">
+                                    <div class="progress-bar bg-danger bg-gradient" role="progressbar" style="width: {% calculate_syllabus_coverage sub request.user %}%" aria-valuenow="{% calculate_syllabus_coverage sub request.user %}" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card  shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-success">Overall Progress</h6>
+                        </div>
+                        <div class="card-body ">
+                            <div class="container d-flex justify-content-center align-items-center mb-3" style="height:400px" >
+                                <canvas id="myChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            
+            <div class="col-xl-4 col-lg-5">
+                <div class="card shadow mb-4">
+                    <div
+                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Rankings</h6>
+                    </div>
+                    <div class="card-body">
+                        "Ranking Here"
+                    </div>
+                </div>
+            </div>
+
+        <!-- Content Row -->
+        <div class="row">
+
+            <!-- Content Column -->
+            <div class="col-lg-6 mb-4">
+
+                <!-- Project Card Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Learnings</h6>
+                    </div>
+                    <div class="card-body">
+                           
+                    </div>
+                </div>
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Progress</h6>
+                    </div>
+                    <div class="card-body ">
+                        <div class="container d-flex justify-content-center align-items-center" style="height:400px">
+                       
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Color System -->
+                <div class="row">
+                    <div class="col-lg-6 mb-4">
+                        <div class="card bg-primary text-white shadow">
+                            <div class="card-body">
+                                Primary
+                                <div class="text-white-50 small">#4e73df</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card bg-success text-white shadow">
+                            <div class="card-body">
+                                Success
+                                <div class="text-white-50 small">#1cc88a</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card bg-info text-white shadow">
+                            <div class="card-body">
+                                Info
+                                <div class="text-white-50 small">#36b9cc</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card bg-warning text-white shadow">
+                            <div class="card-body">
+                                Warning
+                                <div class="text-white-50 small">#f6c23e</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card bg-danger text-white shadow">
+                            <div class="card-body">
+                                Danger
+                                <div class="text-white-50 small">#e74a3b</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card bg-secondary text-white shadow">
+                            <div class="card-body">
+                                Secondary
+                                <div class="text-white-50 small">#858796</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card bg-light text-black shadow">
+                            <div class="card-body">
+                                Light
+                                <div class="text-black-50 small">#f8f9fc</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card  text-bg-dark shadow">
+                            <div class="card-body">
+                                Dark
+                                <div class="text-white-50 small">#5a5c69</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+</div>
+<script>
+    const ctx = document.getElementById('myChart');
+    let subs="{% for sub in Subjects %}{{sub.name}}|{% endfor %}".split('|')
+    let syllabus_covered="{% for sub in Subjects %}{% calculate_syllabus_coverage sub request.user %}|{% endfor %}".split("|")
+    subs.pop()
+    syllabus_covered.pop()
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: subs,
+      datasets: [{
+        label: 'Covered %',
+        data: syllabus_covered,
+        borderWidth:1
+      }]
+    },
+  });
+</script>
+
+{% endblock body %}

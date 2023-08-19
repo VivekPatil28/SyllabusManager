@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block body %}
+    <style>
+        .textbody ul{
+            margin:10px 0px;
+        }
+        .textbody li{
+            margin:3px 0px;
+        }
+        .textbody > div{
+            text-indent: 20px;
+            margin:10px 0px;
+        }
+        a{
+            text-decoration:none;
+            color:black;
+        }
+        .table{
+            font-size: 15px;
+        }
+    
+    </style>
+    <div class="container-fluid text-bg-dark">
+        <div class="row">
+            <div class="col-3 bg-secondary-subtle ">
+                <ul class="position-sticky px-4" style="top:0px;padding-top:50px;min-height:100vh;">
+                    <h4 class="text-center text-dark my-2">{{subtopic.topic.name}}</h4>
+                    {% for i in subtopic.topic.subtopic.all %}
+                    <hr class="hr  text-dark"/>
+                        {% if subtopic.name == i.name %}
+                        <li><a href="{{i.slug}}" class="text-primary">{{i.name}}</a></li>
+                        {% else %}
+                            <li><a href="{{i.slug}}">{{i.name}}</a></li>
+                        {% endif %}
+                        
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-9">
+                <h4 class="text-center my-5">{{subtopic.name}}</h4>
+                <h6 class="textbody mx-5" style="font-family:sans-serif,monospace;">
+                    {{subtopic.body|safe}}
+                </h6>
+            </div>
+        </div>
+    </div>
+    <script>
+        const table = document.getElementsByTagName('table')
+        for(let i=0;i<table.length;i++){
+            table[i].classList.add('table','table-primary','table-striped')
+        }
+    </script>
+{% endblock body %}

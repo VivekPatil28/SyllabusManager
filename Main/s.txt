@@ -1,0 +1,517 @@
+#jdbc
+
+mcqs =[
+    ("What does JDBC stand for?", 
+    "a) Java Database Connectivity", "b) JavaScript Database Connector", "c) Java Data Binding Compiler", "d) JSON Data Broadcasting Component", "a"),
+    
+    ("Which component of JDBC manages the communication between Java applications and databases?", 
+    "a) JDBC API", "b) JDBC Driver", "c) JDBC Connection", "d) JDBC Statement", "a"),
+    
+    ("Which part of JDBC provides a platform-independent interface between Java applications and different database management systems?", 
+    "a) JDBC API", "b) JDBC Driver", "c) JDBC Connection", "d) JDBC Statement", "a"),
+    
+    ("Which type of JDBC driver translates JDBC calls into the database's network protocol directly?", 
+    "a) Type 1", "b) Type 2", "c) Type 3", "d) Type 4", "d"),
+    
+    ("Which type of JDBC driver is also known as the thin driver?", 
+    "a) Type 1", "b) Type 2", "c) Type 3", "d) Type 4", "d"),
+    
+    ("Which type of JDBC driver converts JDBC calls into a DBMS-independent network protocol, which is then translated to the specific DBMS protocol by a separate middle-tier server?", 
+    "a) Type 1", "b) Type 2", "c) Type 3", "d) Type 4", "c"),
+    
+    ("Which type of JDBC driver communicates directly with the database using the database's own network protocol?", 
+    "a) Type 1", "b) Type 2", "c) Type 3", "d) Type 4", "b"),
+    
+    ("Which component of JDBC manages the connection to a database?", 
+    "a) JDBC API", "b) JDBC Driver", "c) JDBC Connection", "d) JDBC Statement", "c"),
+    
+    ("Which component of JDBC is responsible for executing SQL queries?", 
+    "a) JDBC API", "b) JDBC Driver", "c) JDBC Connection", "d) JDBC Statement", "d"),
+    
+    ("Which class is used to load the JDBC driver class?", 
+    "a) java.sql.DriverLoader", "b) DriverManager", "c) JDBCLoader", "d) DBDriver", "b"),
+    
+    ("Which method is used to establish a connection to a database in JDBC?", 
+    "a) getConnection()", "b) establishConnection()", "c) openConnection()", "d) createConnection()", "a"),
+    
+    ("Which interface provides methods for creating SQL statements?", 
+    "a) java.sql.Statement", "b) java.sql.PreparedStatement", "c) java.sql.Connection", "d) java.sql.ResultSet", "a"),
+    
+    ("Which interface extends the Statement interface and provides support for precompiled SQL queries?", 
+    "a) java.sql.Statement", "b) java.sql.PreparedStatement", "c) java.sql.Connection", "d) java.sql.ResultSet", "b"),
+    
+    ("Which interface is used to execute SQL queries that return multiple rows of data?", 
+    "a) java.sql.Statement", "b) java.sql.PreparedStatement", "c) java.sql.Connection", "d) java.sql.ResultSet", "d"),
+    
+    ("Which method is used to execute a query that returns a single ResultSet object?", 
+    "a) execute()", "b) executeQuery()", "c) executeUpdate()", "d) executeStatement()", "b"),
+    
+    ("Which method is used to execute a query that doesn't return any ResultSet?", 
+    "a) execute()", "b) executeQuery()", "c) executeUpdate()", "d) executeStatement()", "c"),
+    
+    ("Which method is used to execute parameterized SQL queries?", 
+    "a) execute()", "b) executeQuery()", "c) executeUpdate()", "d) setParameterizedQuery()", "c"),
+    
+    ("Which method is used to execute parameterized SQL queries that return multiple rows of data?", 
+    "a) execute()", "b) executeQuery()", "c) executeUpdate()", "d) setParameterizedQuery()", "b"),
+    
+    ("Which method is used to execute parameterized SQL queries that don't return any ResultSet?", 
+    "a) execute()", "b) executeQuery()", "c) executeUpdate()", "d) setParameterizedQuery()", "c"),
+    
+    ("Which interface is used to represent a table of data resulting from a query?", 
+    "a) java.sql.Table", "b) java.sql.DataTable", "c) java.sql.ResultSet", "d) java.sql.QueryResult", "c"),
+    
+    ("Which method is used to iterate over the rows of a ResultSet?", 
+    "a) next()", "b) move()", "c) iterate()", "d) fetch()", "a"),
+    
+    ("Which method is used to retrieve data from a column in a ResultSet?", 
+    "a) getString()", "b) retrieveString()", "c) getColumn()", "d) fetchData()", "a"),
+    
+    ("Which method is used to update data in a database using a ResultSet?", 
+    "a) update()", "b) commit()", "c) edit()", "d) updateRow()", "d"),
+    
+    ("Which method is used to insert a new row of data into a ResultSet?", 
+    "a) insertRow()", "b) addRow()", "c) newRow()", "d) addNewRow()", "a"),
+    
+    ("Which method is used to delete the current row from a ResultSet and the underlying database?", 
+    "a) delete()", "b) remove()", "c) erase()", "d) deleteRow()", "d"),
+    
+    ("Which method is used to move the cursor to a specific row in a ResultSet?", 
+    "a) moveTo()", "b) navigateTo()", "c) move()", "d) absolute()", "d"),
+    
+    ("Which method is used to close a ResultSet?", 
+    "a) closeResultSet()", "b) close()", "c) shutdown()", "d) end()", "b"),
+    
+    ("Which method is used to close a database connection in JDBC?", 
+    "a) closeConnection()", "b) disconnect()", "c) shutdown()", "d) close()", "d"),
+    
+    ("Which type of driver is most suitable for connecting to non-conventional databases or web services?", 
+    "a) Type 1", "b) Type 2", "c) Type 3", "d) Type 4", "c"),
+    
+    ("Which type of driver is implemented entirely in Java and requires a network connection to communicate with the database?", 
+    "a) Type 1", "b) Type 2", "c) Type 3", "d) Type 4", "c"),
+    
+    ("Which type of driver is also known as the network protocol driver?", 
+    "a) Type 1", "b) Type 2", "c) Type 3", "d) Type 4", "c"),
+    
+    ("Which type of driver is platform-independent and communicates with a middle-tier server that translates JDBC calls into the specific DBMS protocol?", 
+    "a) Type 1", "b) Type 2", "c) Type 3", "d) Type 4", "c"),
+    
+    ("Which type of driver translates JDBC calls into the DBMS-specific protocol using native API?", 
+    "a) Type 1", "b) Type 2", "c) Type 3", "d) Type 4", "b"),
+    
+    ("Which type of driver communicates with the database using the database's network protocol?", 
+    "a) Type 1", "b) Type 2", "c) Type 3", "d) Type 4", "b"),
+
+    ("Which method is used to retrieve metadata about a database result set?", 
+    "a) getMetadata()", "b) getResultMetadata()", "c) retrieveMetadata()", "d) fetchMetadata()", "a"),
+    
+    ("Which interface is used to obtain metadata about a ResultSet's columns?", 
+    "a) java.sql.ColumnMetaData", "b) java.sql.MetaData", "c) java.sql.ResultSetMetaData", "d) java.sql.TableMetaData", "c"),
+    
+    ("Which method is used to obtain the number of columns in a ResultSet?", 
+    "a) getColumnCount()", "b) getColumnNumber()", "c) getCountColumns()", "d) getColumns()", "a"),
+    
+    ("Which method is used to obtain the name of a column in a ResultSet?", 
+    "a) getColumnName()", "b) fetchColumnName()", "c) retrieveColumnName()", "d) columnName()", "a"),
+    
+    ("Which method is used to obtain the data type of a column in a ResultSet?", 
+    "a) getColumnType()", "b) fetchColumnType()", "c) retrieveColumnType()", "d) columnType()", "a"),
+    
+    ("Which method is used to obtain the number of rows affected by an SQL UPDATE, INSERT, or DELETE statement?", 
+    "a) getRowCount()", "b) fetchRowCount()", "c) retrieveRowCount()", "d) rowCount()", "a"),
+    
+    ("Which method is used to obtain the auto-generated keys for the rows inserted using executeUpdate()?", 
+    "a) getGeneratedKeys()", "b) fetchGeneratedKeys()", "c) retrieveGeneratedKeys()", "d) generatedKeys()", "a"),
+    
+    ("Which method is used to set a parameter value in a PreparedStatement?", 
+    "a) setParameter()", "b) setValue()", "c) set()", "d) setParameterAt()", "c"),
+    
+    ("Which method is used to execute a batch of SQL statements?", 
+    "a) execute()", "b) executeBatch()", "c) executeUpdate()", "d) executeBatchUpdate()", "b"),
+    
+    ("Which method is used to clear the batch of SQL statements in a PreparedStatement?", 
+    "a) clearBatch()", "b) resetBatch()", "c) clear()", "d) clearBatchStatements()", "a"),
+    
+    ("Which method is used to add a SQL statement to the batch of a PreparedStatement?", 
+    "a) addToBatch()", "b) add()", "c) addBatch()", "d) addStatement()", "c"),
+    
+    ("Which method is used to obtain the auto-generated keys after executing a batch of SQL statements?", 
+    "a) getGeneratedKeys()", "b) fetchGeneratedKeys()", "c) retrieveGeneratedKeys()", "d) generatedKeys()", "a"),
+    
+    ("Which method is used to retrieve the maximum number of rows that a ResultSet can contain?", 
+    "a) getMaxRowCount()", "b) getRowCountLimit()", "c) getRowLimit()", "d) getMaxRows()", "d"),
+    
+    ("Which method is used to set the maximum number of rows that a ResultSet can contain?", 
+    "a) setMaxRowCount()", "b) setRowCountLimit()", "c) setRowLimit()", "d) setMaxRows()", "d"),
+    
+    ("Which method is used to set the fetch direction for fetching rows from a ResultSet?", 
+    "a) setFetchDirection()", "b) setDirection()", "c) setFetch()", "d) fetchRows()", "a"),
+    
+    ("Which fetch direction is used to fetch rows in reverse order?", 
+    "a) FETCH_FORWARD", "b) FETCH_REVERSE", "c) FETCH_BACKWARD", "d) FETCH_REVERSE_ORDER", "c"),
+    
+    ("Which fetch direction is used to fetch rows in a forward-only manner?", 
+    "a) FETCH_FORWARD", "b) FETCH_REVERSE", "c) FETCH_FORWARD_ONLY", "d) FETCH_SINGLE", "a"),
+    
+    ("Which fetch direction is used to fetch rows in a random order?", 
+    "a) FETCH_FORWARD", "b) FETCH_REVERSE", "c) FETCH_RANDOM", "d) FETCH_RANDOM_ORDER", "c"),
+    
+    ("Which method is used to retrieve the fetch direction of a ResultSet?", 
+    "a) getFetchDirection()", "b) fetchDirection()", "c) getDirection()", "d) direction()", "a"),
+    
+    ("Which method is used to set the fetch size for fetching rows from a ResultSet?", 
+    "a) setFetchSize()", "b) setSize()", "c) setRowSize()", "d) fetchRows()", "a"),
+    
+    ("Which method is used to retrieve the fetch size of a ResultSet?", 
+    "a) getFetchSize()", "b) fetchSize()", "c) getRowSize()", "d) size()", "a"),
+    
+    ("Which type of ResultSet concurrency allows you to update rows and reflect the changes to the underlying database?", 
+    "a) CONCUR_READ_ONLY", "b) CONCUR_UPDATABLE", "c) CONCUR_WRITE_ONLY", "d) CONCUR_APPEND", "b"),
+    
+    ("Which type of ResultSet concurrency does not allow you to update rows?", 
+    "a) CONCUR_READ_ONLY", "b) CONCUR_UPDATABLE", "c) CONCUR_WRITE_ONLY", "d) CONCUR_APPEND", "a"),
+    
+    ("Which method is used to retrieve the concurrency mode of a ResultSet?", 
+    "a) getConcurrencyMode()", "b) concurrencyMode()", "c) getConcurrency()", "d) mode()", "c"),
+    
+    ("Which method is used to obtain a ResultSet that is updatable and allows changes to be written to the database?", 
+    "a) createUpdatableResultSet()", "b) createResultSet()", "c) createWritableResultSet()", "d) createUpdateableResultSet()", "a"),
+    
+    ("Which method is used to obtain a ResultSet that is updatable and scrollable in any direction?", 
+    "a) createUpdatableScrollableResultSet()", "b) createScrollableUpdatableResultSet()", "c) createScrollableResultSet()", "d) createUpdatableResultSet()", "a"),
+    
+    ("Which method is used to retrieve the holdability of a ResultSet?", 
+    "a) getHoldability()", "b) holdability()", "c) getResultSetHoldability()", "d) resultSetHoldability()", "a"),
+    
+    ("Which type of ResultSet holdability indicates that the ResultSet will be closed when the associated Statement is closed?", 
+    "a) HOLD_CURSORS_OVER_COMMIT", "b) CLOSE_CURSORS_AT_COMMIT", "c) HOLDABLE", "d) CLOSEABLE", "b"),
+    
+    ("Which type of ResultSet holdability indicates that the ResultSet will remain open even after a commit?", 
+    "a) HOLD_CURSORS_OVER_COMMIT", "b) CLOSE_CURSORS_AT_COMMIT", "c) HOLDABLE", "d) COMMIT_HOLD", "a"),
+    
+    ("Which method is used to specify that a PreparedStatement should return auto-generated keys after execution?", 
+    "a) setReturnGeneratedKeys()", "b) setGenerateKeys()", "c) setAutoGeneratedKeys()", "d) setKeys()", "a"),
+    
+    ("Which constant is used to indicate that no auto-generated keys should be returned after execution?", 
+    "a) RETURN_NO_KEYS", "b) RETURN_NONE", "c) RETURN_NOTHING", "d) RETURN_NULL_KEYS", "b"),
+    
+    ("Which constant is used to indicate that all auto-generated keys should be returned after execution?", 
+    "a) RETURN_ALL_KEYS", "b) RETURN_FULL_KEYS", "c) RETURN_GENERATED_KEYS", "d) RETURN_AUTO_KEYS", "c"),
+    
+    ("Which method is used to obtain the auto-generated keys after executing a PreparedStatement?", 
+    "a) getGeneratedKeys()", "b) fetchGeneratedKeys()", "c) retrieveGeneratedKeys()", "d) generatedKeys()", "a"),
+]
+
+
+
+
+
+
+mcqs = [
+    ("What is the role of JavaServer Pages (JSP) in web applications?", 
+    "a) Creating database connections", "b) Handling user input", "c) Generating dynamic web content", "d) Managing user sessions", "c"),
+    
+    ("Which technology is used to create dynamic web content in Java?", 
+    "a) JavaServer Pages (JSP)", "b) Java Virtual Machine (JVM)", "c) Java Standard Edition (Java SE)", "d) Java Development Kit (JDK)", "a"),
+    
+    ("Which component is responsible for processing client requests and generating responses?", 
+    "a) JavaServer Pages (JSP)", "b) Servlet", "c) Applet", "d) JavaScript", "b"),
+    
+    ("What is the main advantage of using servlets for web applications?", 
+    "a) Better client-side scripting", "b) Faster rendering of web pages", "c) Improved user interface", "d) Server-side processing", "d"),
+    
+    ("What is the architecture of a web application typically composed of?", 
+    "a) Client and Server", "b) HTML and CSS", "c) JavaScript and jQuery", "d) XML and JSON", "a"),
+    
+    ("Which component handles user requests and generates responses in a web application?", 
+    "a) Client", "b) Server", "c) Browser", "d) CSS", "b"),
+    
+    ("What is the purpose of a servlet in a web application?", 
+    "a) Rendering HTML pages", "b) Processing client requests", "c) Executing JavaScript code", "d) Displaying images", "b"),
+    
+    ("Which phase of a servlet's life cycle is responsible for initializing the servlet?", 
+    "a) Initialization phase", "b) Initialization stage", "c) Initialization step", "d) Initialization process", "a"),
+    
+    ("What is the first method called during the life cycle of a servlet?", 
+    "a) init()", "b) destroy()", "c) service()", "d) doGet()", "a"),
+    
+    ("When does the destroy() method of a servlet get called?", 
+    "a) When the servlet is initialized", "b) When the servlet receives a request", "c) When the server is shut down", "d) When the servlet generates a response", "c"),
+    
+    ("What is the purpose of the service() method in a servlet?", 
+    "a) Initializing the servlet", "b) Processing client requests", "c) Rendering web pages", "d) Handling exceptions", "b"),
+    
+    ("Which HTTP method is used to retrieve data from a server?", 
+    "a) GET", "b) POST", "c) PUT", "d) DELETE", "a"),
+    
+    ("Which HTTP method is used to send data to a server?", 
+    "a) GET", "b) POST", "c) PUT", "d) DELETE", "b"),
+    
+    ("Which component is responsible for mapping URLs to servlets in a web application?", 
+    "a) Servlet Container", "b) Web Browser", "c) HTML Page", "d) JavaScript", "a"),
+    
+    ("What is the purpose of the web.xml file in a Java web application?", 
+    "a) Storing client-side scripts", "b) Defining servlet mappings", "c) Storing user session data", "d) Defining CSS styles", "b"),
+    
+    ("Which section of the web.xml file defines the URL patterns associated with a servlet?", 
+    "a) <url-pattern>", "b) <servlet-mapping>", "c) <servlet-name>", "d) <mapping>", "b"),
+    
+    ("Which component is responsible for storing user-related data during a session?", 
+    "a) Servlet Container", "b) Web Browser", "c) JavaScript", "d) HttpSession", "d"),
+    
+    ("Which method is used to handle incoming client requests in a servlet?", 
+    "a) doGet()", "b) doPost()", "c) processRequest()", "d) handleRequest()", "a"),
+    
+    ("What is the purpose of the HttpServletResponse object in a servlet?", 
+    "a) Storing client requests", "b) Generating HTML pages", "c) Sending responses to clients", "d) Managing user sessions", "c"),
+    
+    ("Which method is used to send data to the client in a servlet?", 
+    "a) write()", "b) send()", "c) append()", "d) print()", "d"),
+    
+    ("Which method is used to redirect a client to a different URL in a servlet?", 
+    "a) forward()", "b) redirect()", "c) sendRedirect()", "d) setLocation()", "c"),
+    
+    ("What is the purpose of the HttpServletRequest object in a servlet?", 
+    "a) Storing client requests", "b) Retrieving data from clients", "c) Handling exceptions", "d) Displaying web pages", "b"),
+    
+    ("Which method is used to retrieve data sent by the client in a POST request?", 
+    "a) getData()", "b) retrieveData()", "c) readData()", "d) getParameter()", "d"),
+    
+    ("Which method is used to retrieve data sent by the client in a GET request?", 
+    "a) getData()", "b) retrieveData()", "c) readData()", "d) getParameter()", "d"),
+    
+    ("What is the purpose of the ServletConfig object in a servlet?", 
+    "a) Storing user data", "b) Handling client requests", "c) Initializing servlet parameters", "d) Sending responses", "c"),
+    
+    ("Which method is used to retrieve initialization parameters defined in the web.xml file?", 
+    "a) getInitParameter()", "b) fetchParameter()", "c) readParameter()", "d) initParameter()", "a"),
+
+    ("What is the purpose of a servlet container in a web application?", 
+    "a) Storing client-side scripts", "b) Managing servlet life cycles", "c) Generating HTML pages", "d) Rendering CSS styles", "b"),
+    
+    ("Which technology is used to dynamically generate HTML content in a servlet?", 
+    "a) JavaServer Pages (JSP)", "b) Java Virtual Machine (JVM)", "c) Java Standard Edition (Java SE)", "d) Java Development Kit (JDK)", "a"),
+    
+    ("What is the primary role of the doGet() method in a servlet?", 
+    "a) Initializing the servlet", "b) Handling GET requests", "c) Sending responses to clients", "d) Processing client data", "b"),
+    
+    ("What is the primary role of the doPost() method in a servlet?", 
+    "a) Initializing the servlet", "b) Handling POST requests", "c) Sending responses to clients", "d) Processing client data", "b"),
+    
+    ("Which method is used to retrieve information about the client's user agent?", 
+    "a) getUserAgent()", "b) getClientInfo()", "c) getUserAgentInfo()", "d) getHeader()", "d"),
+    
+    ("What is the role of the HttpSession object in a servlet?", 
+    "a) Storing servlet configuration", "b) Managing servlet life cycles", "c) Storing user-specific data", "d) Handling client requests", "c"),
+    
+    ("Which method is used to create a new session or retrieve an existing session?", 
+    "a) getSession()", "b) createSession()", "c) startSession()", "d) newSession()", "a"),
+    
+    ("Which session management technique uses a unique session identifier in URLs?", 
+    "a) URL rewriting", "b) Cookie-based session", "c) Hidden form fields", "d) Session tracking", "a"),
+    
+    ("Which session management technique uses a cookie to store the session ID?", 
+    "a) URL rewriting", "b) Cookie-based session", "c) Hidden form fields", "d) Session tracking", "b"),
+    
+    ("What is the purpose of the ServletRequest object in a servlet?", 
+    "a) Storing client data", "b) Sending responses to clients", "c) Initializing servlet parameters", "d) Handling exceptions", "a"),
+    
+    ("Which method is used to retrieve the content type of the request in a servlet?", 
+    "a) getContentType()", "b) fetchContentType()", "c) retrieveContentType()", "d) contentType()", "a"),
+    
+    ("Which method is used to obtain the header names from an HttpServletRequest object?", 
+    "a) getHeaderNames()", "b) fetchHeaders()", "c) retrieveHeaderNames()", "d) headerNames()", "a"),
+    
+    ("What is the purpose of the ServletResponse object in a servlet?", 
+    "a) Storing client data", "b) Handling client requests", "c) Sending responses to clients", "d) Initializing servlet parameters", "c"),
+    
+    ("Which method is used to set the content type of the response in a servlet?", 
+    "a) setContentType()", "b) contentType()", "c) setResponseContentType()", "d) setResponseType()", "a"),
+    
+    ("What is the purpose of the setAttribute() method in a servlet's HttpServletRequest object?", 
+    "a) Setting session attributes", "b) Storing client data", "c) Managing cookies", "d) Handling exceptions", "b"),
+    
+    ("What is the purpose of the getAttribute() method in a servlet's HttpServletRequest object?", 
+    "a) Retrieving session attributes", "b) Getting client data", "c) Sending responses", "d) Handling exceptions", "a"),
+    
+    ("Which method is used to remove an attribute from a servlet's HttpServletRequest object?", 
+    "a) removeAttribute()", "b) deleteAttribute()", "c) discardAttribute()", "d) clearAttribute()", "a"),
+    
+    ("Which method is used to include the content of another resource in the response?", 
+    "a) includeResource()", "b) insertResource()", "c) addResource()", "d) include()", "d"),
+    
+    ("What is the purpose of the RequestDispatcher object in a servlet?", 
+    "a) Sending client requests", "b) Forwarding requests to another resource", "c) Storing client data", "d) Initializing servlet parameters", "b"),
+    
+    ("Which method is used to forward a request from a servlet to another resource?", 
+    "a) forwardRequest()", "b) forward()", "c) sendRedirect()", "d) redirectTo()", "b"),
+    
+    ("What is the primary purpose of URL rewriting in servlets?", 
+    "a) Hiding URLs from users", "b) Storing data in URLs", "c) Reducing server load", "d) Encrypting URLs", "b"),
+    
+    ("What is the purpose of the getParameter() method in a servlet's HttpServletRequest object?", 
+    "a) Retrieving servlet configuration", "b) Sending client data", "c) Handling client requests", "d) Initializing servlet parameters", "b"),
+    
+    ("Which method is used to retrieve multiple parameter values for a given parameter name?", 
+    "a) getParameters()", "b) fetchParameterValues()", "c) retrieveParameterValues()", "d) getParameterValues()", "d"),
+    
+    ("Which method is used to retrieve a single parameter value from a servlet's HttpServletRequest object?", 
+    "a) getParameter()", "b) fetchParameter()", "c) retrieveParameter()", "d) obtainParameter()", "a"),
+    
+    ("What is the purpose of the HttpServletResponseWrapper class in servlets?", 
+    "a) Modifying client requests", "b) Modifying server responses", "c) Handling client data", "d) Initializing servlet parameters", "b"),
+    
+    ("Which method is used to add a new cookie to the client's browser in a servlet?", 
+    "a) addCookie()", "b) setCookie()", "c) insertCookie()", "d) createCookie()", "a"),
+    
+    ("What is the purpose of the Cookie class in servlets?", 
+    "a) Managing session data", "b) Handling exceptions", "c) Storing user data", "d) Storing client data", "d"),
+    
+    ("Which method is used to send a redirect response to the client's browser in a servlet?", 
+    "a) sendRedirect()", "b) forward()", "c) redirectTo()", "d) redirectResponse()", "a"),
+    
+    ("What is the primary advantage of using URL rewriting for session management?", 
+    "a) Improved security", "b) Reduced server load", "c) Faster response times", "d) Greater flexibility", "b"),
+    
+    ("Which method is used to invalidate a session in a servlet?", 
+    "a) invalidate()", "b) deleteSession()", "c) terminateSession()", "d) endSession()", "a"),
+    
+    ("What is the purpose of the ServletContext object in a servlet?", 
+    "a) Storing servlet configuration", "b) Storing user data", "c) Storing application-wide data", "d) Handling client requests", "c"),
+    
+    ("Which method is used to retrieve the real path for a given virtual path in a servlet context?", 
+    "a) getRealPath()", "b) fetchRealPath()", "c) retrieveRealPath()", "d) obtainRealPath()", "a"),
+    
+    ("What is the purpose of the init() method in a servlet?", 
+    "a) Initializing servlet parameters", "b) Handling client requests", "c) Sending responses to clients", "d) Managing servlet life cycles", "a"),
+    
+    ("What is the purpose of the destroy() method in a servlet?", 
+    "a) Initializing servlet parameters", "b) Handling client requests", "c) Sending responses to clients", "d) Releasing resources", "d"),
+    
+    ("Which method is used to set the MIME type of a response in a servlet?", 
+    "a) setMimeType()", "b) setContentType()", "c) setResponseType()", "d) setMIME()", "b"),
+    
+    ("Which method is used to set the status code of a response in a servlet?", 
+    "a) setStatus()", "b) setStatusCode()", "c) setStatusMessage()", "d) setResponseCode()", "a"),
+    
+    ("What is the purpose of the setHeader() method in a servlet's HttpServletResponse object?", 
+    "a) Setting request headers", "b) Modifying client requests", "c) Sending responses to clients", "d) Handling client data", "c"),
+    
+    ("Which method is used to write binary data to the response in a servlet?", 
+    "a) writeData()", "b) sendBinary()", "c) writeBinary()", "d) getOutputStream()", "d"),
+    
+    ("What is the purpose of the getWriter() method in a servlet's HttpServletResponse object?", 
+    "a) Retrieving request data", "b) Writing to the response", "c) Sending responses to clients", "d) Handling exceptions", "b"),
+    
+    ("Which method is used to set the character encoding of the response in a servlet?", 
+    "a) setEncoding()", "b) setCharset()", "c) setCharacterEncoding()", "d) setResponseEncoding()", "c"),
+    
+    ("What is the purpose of the forward() method in a servlet?", 
+    "a) Forwarding client requests", "b) Sending responses to clients", "c) Redirecting requests", "d) Handling client data", "a"),
+    
+    ("What is the purpose of the include() method in a servlet?", 
+    "a) Including external resources", "b) Sending responses to clients", "c) Forwarding requests", "d) Redirecting requests", "a"),
+    
+    ("What is the purpose of the ServletRequestDispatcher object in a servlet?", 
+    "a) Forwarding client requests", "b) Redirecting requests", "c) Handling client data", "d) Sending responses to clients", "a"),
+    
+    ("What is the purpose of the setAttribute() method in a servlet's HttpSession object?", 
+    "a) Storing servlet configuration", "b) Storing user-specific data", "c) Managing cookies", "d) Handling exceptions", "b"),
+    
+    ("Which method is used to retrieve the session ID from a servlet's HttpSession object?", 
+    "a) getSessionID()", "b) fetchSessionID()", "c) retrieveSessionID()", "d) getId()", "d"),
+    
+    ("What is the primary purpose of a JSP in a web application?", 
+    "a) Handling client requests", "b) Generating dynamic content", "c) Managing servlet life cycles", "d) Rendering CSS styles", "b"),
+    
+    ("Which phase of the JSP life cycle is responsible for initializing the JSP?", 
+    "a) Initialization phase", "b) Initialization stage", "c) Initialization step", "d) Initialization process", "a"),
+    
+    ("What is the primary role of the service() method in a JSP?", 
+    "a) Initializing the JSP", "b) Handling GET requests", "c) Sending responses to clients", "d) Processing client data", "c"),
+    
+    ("Which phase of the JSP life cycle is responsible for destroying the JSP?", 
+    "a) Destruction phase", "b) Destruction stage", "c) Destruction step", "d) Destruction process", "a"),
+    
+    ("Which directive is used to import a Java class or package in a JSP?", 
+    "a) <java>", "b) <import>", "c) <class>", "d) <package>", "b"),
+    
+    ("What is the purpose of the <%-- ... --%> tag in a JSP?", 
+    "a) Importing Java classes", "b) Defining variables", "c) Writing comments", "d) Declaring methods", "c"),
+    
+    ("Which action is used to include the content of an external resource in a JSP?", 
+    "a) <jsp:include>", "b) <jsp:import>", "c) <jsp:content>", "d) <jsp:external>", "a"),
+    
+    ("What is the purpose of the <%@ page %> directive in a JSP?", 
+    "a) Importing Java classes", "b) Specifying the JSP version", "c) Defining methods", "d) Writing comments", "b"),
+    
+    ("Which JSP element is used to declare reusable content that can be included in other JSP files?", 
+    "a) <jsp:include>", "b) <jsp:declaration>", "c) <jsp:content>", "d) <jsp:directive>", "b"),
+    
+    ("What is the purpose of the <%@ include %> directive in a JSP?", 
+    "a) Importing Java classes", "b) Including external content", "c) Defining methods", "d) Writing comments", "b"),
+    
+    ("Which action is used to insert the result of a JSP expression into the output?", 
+    "a) <jsp:expression>", "b) <jsp:output>", "c) <jsp:insert>", "d) <jsp:result>", "a"),
+    
+    ("What is the purpose of the <%! ... %> tag in a JSP?", 
+    "a) Importing Java classes", "b) Defining variables", "c) Writing comments", "d) Declaring methods", "d"),
+    
+    ("Which directive is used to define a custom tag in a JSP?", 
+    "a) <tag:define>", "b) <custom:tag>", "c) <jsp:tag>", "d) <jsp:directive>", "c"),
+    
+    ("What is the purpose of the <jsp:forward> action in a JSP?", 
+    "a) Forwarding client requests", "b) Including external content", "c) Redirecting requests", "d) Handling client data", "a"),
+    
+    ("What is the purpose of the <jsp:useBean> action in a JSP?", 
+    "a) Declaring variables", "b) Importing Java classes", "c) Handling client requests", "d) Creating or reusing JavaBean instances", "d"),
+    
+    ("Which method is used to retrieve parameter values from a request in a JSP?", 
+    "a) getRequestParameters()", "b) fetchParameterValues()", "c) retrieveParameters()", "d) getParameterValues()", "d"),
+    
+    ("What is the purpose of the <jsp:plugin> action in a JSP?", 
+    "a) Embedding Java applets", "b) Importing Java classes", "c) Including external content", "d) Writing comments", "a"),
+    
+    ("Which action is used to iterate over a collection of items in a JSP?", 
+    "a) <jsp:foreach>", "b) <jsp:for>", "c) <jsp:loop>", "d) <c:forEach>", "d"),
+    
+    ("What is the purpose of the <jsp:scriptlet> action in a JSP?", 
+    "a) Importing Java classes", "b) Writing comments", "c) Declaring variables", "d) Writing Java code", "d"),
+    
+    ("Which JSP action is used to handle exceptions in a JSP?", 
+    "a) <jsp:catch>", "b) <jsp:except>", "c) <jsp:exception>", "d) <c:catch>", "a"),
+    
+    ("What is the purpose of the <jsp:setProperty> action in a JSP?", 
+    "a) Setting request properties", "b) Setting bean properties", "c) Importing Java classes", "d) Handling client data", "b"),
+    
+    ("Which directive is used to include the content of an external file in a JSP?", 
+    "a) <jsp:include>", "b) <jsp:import>", "c) <jsp:content>", "d) <%@ include %>", "d"),
+    
+    ("What is the purpose of the <jsp:useBean> action's 'scope' attribute?", 
+    "a) Specifying bean properties", "b) Defining the scope of the bean", "c) Handling exceptions", "d) Setting request attributes", "b"),
+    
+    ("Which action is used to perform conditional processing in a JSP?", 
+    "a) <jsp:if>", "b) <jsp:when>", "c) <jsp:choose>", "d) <c:if>", "c"),
+    
+    ("What is the purpose of the <jsp:forward> action in a JSP?", 
+    "a) Forwarding client requests", "b) Including external content", "c) Redirecting requests", "d) Handling client data", "a"),
+    
+    ("Which JSP action is used to perform iteration over a range of numbers?", 
+    "a) <jsp:loop>", "b) <jsp:for>", "c) <jsp:iterate>", "d) <c:forEach>", "d"),
+    
+    ("What is the purpose of the <jsp:attribute> action in a JSP?", 
+    "a) Defining custom attributes", "b) Importing Java classes", "c) Including external content", "d) Writing comments", "a"),
+    
+    ("Which JSP action is used to define reusable content that can be included in other JSP files?", 
+    "a) <jsp:include>", "b) <jsp:declaration>", "c) <jsp:content>", "d) <jsp:directive>", "c"),
+    
+    ("What is the purpose of the <jsp:param> action in a JSP?", 
+    "a) Defining custom parameters", "b) Importing Java classes", "c) Including external content", "d) Writing comments", "a"),
+    
+    ("Which JSP action is used to define custom tag libraries?", 
+    "a) <jsp:taglib>", "b) <jsp:library>", "c) <jsp:tag>", "d) <c:taglib>", "a"),
+    
+    ("What is the purpose of the <jsp:invoke> action in a JSP?", 
+    "a) Invoking external methods", "b) Importing Java classes", "c) Including external content", "d) Writing comments", "a")
+]
