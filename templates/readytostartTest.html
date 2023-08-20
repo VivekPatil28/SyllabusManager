@@ -1,17 +1,31 @@
 {% extends 'base.html' %}
 {% block body %}
-
-<div class="container-fluid">
-    <div class="card shadow py-2 ">
+<style>
+    body{
+        height:100vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+    .cont{
+        width:70%;
+        height:500px;
+        display:flex;
+        flex-flow:column;
+        justify-content:space-evenly;
+    }
+</style>
+    <div class="card shadow py-2 cont">
         <div class="row mt-5">
             <div class="col">
-                <h1 class="text-center">Test Name : Java Programming</h1>
+                <h1 class="text-center">Test : {{test.name}}</h1>
+                <h6 class="text-center" style="margin-left:30%">-{{test.subject}}</h6>
             </div>
         </div>
         <div class="row mt-5">
             <div class="col">
                 <h6>
-                    <ul type="square" class="text-danger">
+                    <ul type="square" class="text-danger px-5">
                         <li class="list-item">Users is allowed to attempt the test only once.</li>
                         <li class="list-item">Each question can be visited and answered only once.</li>
                         <li class="list-item">The order of questions is randomized for different users.</li>
@@ -28,11 +42,10 @@
                     <form action="/starttest" method="post">
                         {% csrf_token %}
                         <input type="text" value="{{test.id}}" name="testid" hidden>
-                        <input class="btn btn-primary btn-gradient" type="submit" value="Start Test">
+                        <input class="btn btn-primary btn-gradient" type="submit" value="Go To The First Question">
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock body %}

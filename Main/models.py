@@ -14,7 +14,7 @@ class Semester(models.Model):
     
 class Subject(models.Model):
     name = models.CharField(max_length=500, default="")
-    sem=models.ForeignKey(Semester,on_delete=models.CASCADE,blank=True,null=True,default=None)
+    sem=models.ForeignKey(Semester,on_delete=models.CASCADE,blank=True,null=True,default=None,related_name='subjects')
 
     def __str__(self) -> str:
         return self.name
@@ -100,6 +100,7 @@ class UserQuizAttempt(models.Model):
     test = models.ForeignKey(Test, on_delete=models.CASCADE,related_name="user_attempted_test")
     date_attempted = models.DateTimeField(auto_now_add=True)
     score = models.PositiveIntegerField(default=0)
+    percentage=models.PositiveIntegerField(default=0)
     is_ended=models.BooleanField(default=False)
     def __str__(self):
         return f"{self.user.username} - {self.test.name} ({self.date_attempted})"

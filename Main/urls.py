@@ -13,4 +13,5 @@ urlpatterns = [
     path('showResult',views.showResult),
     path("signup",views.signup,name='signup'),
     path("signout",views.signout,name='signout'),
+    path("sem",views.changeSem,name='changeSem'),
 ]

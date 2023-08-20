@@ -1,12 +1,50 @@
 {% extends 'base.html' %}   
 {% load custom_tags %}
 {% block body %}
-<div class="container-fluid">
 
+<style>
+    .scrollable-list::-webkit-scrollbar {
+    width: 7px;
+    }
+
+    {% comment %} .scrollable-list::-webkit-scrollbar-track {
+    background: #f3f3f3;
+    border-radius: 15px;
+    } {% endcomment %}
+
+    .scrollable-list::-webkit-scrollbar-thumb {
+    background-color: #999;
+    border-radius:15px;
+    }
+
+    .scrollable-list::-webkit-scrollbar-thumb:hover {
+    background-color: #888;
+    }
+</style>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container">
+    <a class="navbar-brand" href="#">Syllabus Manager</a>
+    <div class="btn-group dropstart">
+    <button class="btn btn-secondary btn-sm dropdown-toggle me-md-5 " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {{current_sem.name}}
+    </button>
+    <ul class="dropdown-menu">
+        {% for sem in semester %}
+            <form action="/sem" method="post">
+            {% csrf_token %}
+            <input type="text" hidden name="sem_id" value="{{sem.id}}">
+            <li class="dropdown-item"><input class='w-100' style="border:none;" type="submit" value="{{sem.name}}"></li>
+            </form>
+        {% endfor %}
+    </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid">
 <div id="wrapper" class="container pt-5">
     <div class="container-fluid">
         <div class="row">
-            {% for sub in Subjects %}
+            {% for sub in current_sem.subjects.all %}
                 <div class="col-xl-4 col-md-6 mb-4" >
                     <div class="card shadow h-100 py-2 " style="border-left:6px solid red;">
                         <div class="card-body">
@@ -59,17 +97,33 @@
 
             </div>
 
-            
-            <div class="col-xl-4 col-lg-5">
-                <div class="card shadow mb-4">
-                    <div
-                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Rankings</h6>
+            <div class="row">
+                {% for sub in Subjects %}
+                    <div class="col-xl-4 col-md-6 ">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Rankings - {{sub.name}}</h6>
+                            </div>
+                            <div class="card-body scrollable-list overflow-y-scroll " style="max-height:450px;height:450px;">
+                                <ul class="list-group list-group-flush">
+                                    {% for test in sub|get_all_UserQuizAttempt_per_subject %}
+                                    <li class="list-group-item">
+                                        <div class="row rounded-2 {% if test.user == request.user%} bg-success-subtle{% endif %}">
+                                            <div class="col-9 col-md-10 ">
+                                                {% if forloop.first %}<i class="fa-solid fa-crown fa-bounce"></i>{% endif %}
+                                                {% if forloop.counter == 2 %}<i class="fa-solid fa-trophy"></i>{% endif %}
+                                                {% if forloop.counter == 3 %}<i class="fa-solid fa-shield-halved"></i>{% endif %}
+                                                {{test.user.username|truncatechars:30}}</div>
+                                            <div class="col-3 col-md-2 text-end">{{test.percentage}}</div>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        "Ranking Here"
-                    </div>
-                </div>
+                {% endfor %}
+
             </div>
 
         <!-- Content Row -->

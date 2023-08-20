@@ -18,3 +18,7 @@ def calculate_syllabus_coverage(subject, user):
 @register.filter
 def is_attempted_test(test,user):
     return UserQuizAttempt.objects.filter(user=user, test=test).exists()
+
+@register.filter
+def get_all_UserQuizAttempt_per_subject(subject):
+    return UserQuizAttempt.objects.filter(test__subject=subject).order_by('-percentage')

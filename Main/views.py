@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse
 from .models import *
 import json
+import math
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -11,10 +12,17 @@ from django.views.decorators.cache import cache_control
 
 @login_required
 def homepage(request):
-    Subjects = Subject.objects.filter(sem=1)
+    semester=Semester.objects.all()
+    if 'sem_id' in request.session:
+        current_sem = Semester.objects.get(id=request.session['sem_id'])
+    else:
+        current_sem = Semester.objects.get(id=1)
+    Subjects = Subject.objects.filter(sem=current_sem)
     params = {
         "Subjects": Subjects,
         "quote": Quote,
+        "semester":semester,
+        "current_sem":current_sem,
     }
     return render(request, "homepage.html", params)
 
@@ -93,6 +101,7 @@ def readyToStartTest(request):
     params={
         'test':test,
     }
+    #Return to the homepage if the user already given that Test
     if quiz_attempt.is_ended:
         return redirect('/')
     return render(request,'readytostartTest.html',params)
@@ -105,6 +114,7 @@ def starttest(request):
         return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
     test_id = request.session.get('test_id')
     test = Test.objects.get(id=test_id)
+    #Return to the homepage if the user already given that Test
     if UserQuizAttempt.objects.get(user=request.user,test=test).is_ended:
         return redirect('/')
     questions = Question.objects.filter(test=test)
@@ -135,9 +145,11 @@ def showResult(request):
     if not request.session.get('test_id'):
         return redirect('/')
     quiz=UserQuizAttempt.objects.get(user=request.user,test=request.session.get('test_id'))
+    questions_len=Question.objects.filter(test=request.session.get('test_id')).count()
     res = UserAnswer.objects.filter(user=request.user)
     counter = sum(bool(i.is_correct) for i in res)
     quiz.score=counter
+    quiz.percentage=round(counter/questions_len*100,2)
     quiz.is_ended=True
     quiz.save()
     
@@ -156,3 +168,9 @@ def subtopicdesc(request, str):
         "subtopic": subtopic,
     }
     return render(request, "subtopicdesc.html", params)
+
+def changeSem(request):
+    sem_id=request.POST.get('sem_id')
+    print(sem_id)
+    request.session['sem_id'] = sem_id
+    return redirect('/')
