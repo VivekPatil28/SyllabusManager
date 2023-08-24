@@ -21,26 +21,25 @@
     background-color: #888;
     }
 </style>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container">
-    <a class="navbar-brand" href="#">Syllabus Manager</a>
-    <div class="btn-group dropstart">
-    <button class="btn btn-secondary btn-sm dropdown-toggle me-md-5 " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        {{current_sem.name}}
-    </button>
-    <ul class="dropdown-menu">
-        {% for sem in semester %}
-            <form action="/sem" method="post">
-            {% csrf_token %}
-            <input type="text" hidden name="sem_id" value="{{sem.id}}">
-            <li class="dropdown-item"><input class='w-100' style="border:none;" type="submit" value="{{sem.name}}"></li>
-            </form>
-        {% endfor %}
-    </ul>
-    </div>
-  </div>
-</nav>
 <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container d-flex justify-content-end">
+        <div class="dropstart">
+        <button class="btn btn-secondary btn-sm dropdown-toggle me-md-5 " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{current_sem.name}}
+        </button>
+        <ul class="dropdown-menu">
+            {% for sem in semester %}
+                <form action="/sem" method="post">
+                {% csrf_token %}
+                <input type="text" hidden name="sem_id" value="{{sem.id}}">
+                <li class="dropdown-item"><input class='w-100' style="border:none;" type="submit" value="{{sem.name}}"></li>
+                </form>
+            {% endfor %}
+        </ul>
+        </div>
+      </div>
+    </nav>
 <div id="wrapper" class="container pt-5">
     <div class="container-fluid">
         <div class="row">
@@ -125,103 +124,7 @@
                 {% endfor %}
 
             </div>
-
-        <!-- Content Row -->
-        <div class="row">
-
-            <!-- Content Column -->
-            <div class="col-lg-6 mb-4">
-
-                <!-- Project Card Example -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Learnings</h6>
-                    </div>
-                    <div class="card-body">
-                           
-                    </div>
-                </div>
-
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Progress</h6>
-                    </div>
-                    <div class="card-body ">
-                        <div class="container d-flex justify-content-center align-items-center" style="height:400px">
-                       
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Color System -->
-                <div class="row">
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Primary
-                                <div class="text-white-50 small">#4e73df</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-success text-white shadow">
-                            <div class="card-body">
-                                Success
-                                <div class="text-white-50 small">#1cc88a</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-info text-white shadow">
-                            <div class="card-body">
-                                Info
-                                <div class="text-white-50 small">#36b9cc</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-warning text-white shadow">
-                            <div class="card-body">
-                                Warning
-                                <div class="text-white-50 small">#f6c23e</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-danger text-white shadow">
-                            <div class="card-body">
-                                Danger
-                                <div class="text-white-50 small">#e74a3b</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-secondary text-white shadow">
-                            <div class="card-body">
-                                Secondary
-                                <div class="text-white-50 small">#858796</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-light text-black shadow">
-                            <div class="card-body">
-                                Light
-                                <div class="text-black-50 small">#f8f9fc</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card  text-bg-dark shadow">
-                            <div class="card-body">
-                                Dark
-                                <div class="text-white-50 small">#5a5c69</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            {% include 'footer.html' %}
     </div>
 </div>
     

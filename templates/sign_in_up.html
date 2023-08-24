@@ -48,10 +48,8 @@
 
   button {
     border-radius: 20px;
-    border: 1px solid #e74a3b
-;
-    background-color: #e74a3b
-;
+    border: 1px solid #e74a3b;
+    background-color: #e74a3b;
     color: #ffffff;
     font-size: 12px;
     font-weight: bold;
@@ -213,9 +211,29 @@
   .container.right-panel-active .overlay-right {
     transform: translateX(20%);
   }
+  .min-screen-container{
+    display:none;
+  }
+  @media (max-width: 767px) {
+    .max-screen-container{
+      display:none;
+    }
+    .min-screen-container{
+    display:block;
+    width:90%;
+  }
+  .min-screen-signup-form-container{
+    display:none;
+    margin-top:50px;
+  }
+  .min-screen-signin-form-container{
+    margin-top:100px;
+  }
+
+}
 
 </style>
-<div class="container" id="container">
+<div class="container max-screen-container" id="container">
   <div class="form-container sign-up-container">
     <form action="/signup" method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
@@ -256,6 +274,33 @@
   </div>
 </div>
 
+<div class="container min-screen-container">
+  <div class="min-screen-signin-form-container" id="min-screen-signin-form-container">
+    <form action="/signin" method="POST">
+		{% csrf_token %}
+      <h1>Sign in</h1>
+      <span>or use your account</span>
+      <input type="text" placeholder="Email" name='username' />
+      <input type="password" placeholder="Password" name='password' />
+      <a onclick="signup()">don't have account Sign Up</a>
+      <button>Sign In</button>
+    </form>
+  </div>
+
+  <div class="min-screen-signup-form-container" id="min-screen-signup-form-container">
+    <form action="/signup" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+      <h1>Create Account</h1>
+      <input type="text" placeholder="First Name" name="fname" />
+      <input type="text" placeholder="Last Name" name="lname" />
+      <!-- <input type="file" name="profile" accept="image/png,image/jpg,image/jpeg" /> -->
+      <input type="text" placeholder="Username" name="username" />
+      <input type="password" placeholder="Password" name="password" />
+      <a onclick="signin()">already have account Sign In</a>
+      <button>Sign Up</button>
+    </form>
+  </div>
+</div>
 <script>
   const signUpButton = document.getElementById("signUp");
   const signInButton = document.getElementById("signIn");
@@ -268,6 +313,17 @@
   signInButton.addEventListener("click", () => {
     container.classList.remove("right-panel-active");
   });
+</script>
+
+<script>
+  function signup(){
+    document.getElementById("min-screen-signin-form-container").style.display="none";
+    document.getElementById("min-screen-signup-form-container").style.display="block";
+  }
+  function signin(){
+    document.getElementById("min-screen-signin-form-container").style.display="block";
+    document.getElementById("min-screen-signup-form-container").style.display="none";
+  }
 </script>
 
 {% endblock body %}

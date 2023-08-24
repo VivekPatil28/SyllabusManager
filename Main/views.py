@@ -4,7 +4,6 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse
 from .models import *
 import json
-import math
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -35,7 +34,8 @@ def signin(request):
     user = authenticate(username=username, password=password)
     if user is not None:
         login(request, user)
-        return redirect("/")
+    return redirect("/")
+
 
 
 def signup(request):
@@ -45,14 +45,14 @@ def signup(request):
     lname = request.POST["lname"]
     username = request.POST["username"]
     password = request.POST["password"]
-    profile = request.POST.get("profile")
+    # profile = request.POST.get("profile")
     user = User.objects.create_user(
         first_name=fname, last_name=lname, username=username, password=password
     )
     user.save()
     if user is not None:
         login(request, user)
-        return redirect("/")
+    return redirect("/")
 
 
 @login_required
@@ -171,6 +171,5 @@ def subtopicdesc(request, str):
 
 def changeSem(request):
     sem_id=request.POST.get('sem_id')
-    print(sem_id)
     request.session['sem_id'] = sem_id
     return redirect('/')
