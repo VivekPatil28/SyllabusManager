@@ -26,6 +26,7 @@ class Topic(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True,related_name='topics')
     name = models.TextField(max_length=100, default="")
     is_started = models.BooleanField(default=False)
+    weightage =  models.IntegerField(default=0)
 
     def __str__(self) -> str:
         return self.name
@@ -36,7 +37,7 @@ class SubTopic(models.Model):
     topic = models.ForeignKey(
         Topic, on_delete=models.CASCADE, null=True, related_name="subtopic"
     )
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=500)
     body = RichTextField(null=True,blank=True)
     slug = models.SlugField(max_length=200, unique=True, blank=True, null=True)
     
@@ -45,25 +46,11 @@ class SubTopic(models.Model):
     
 
 
-# @receiver(pre_save, sender=SubTopic)
-# def update_slug(sender, instance, **kwargs):
-#     base_slug = slugify(instance.name)
-#     counter = 1
-#     while SubTopic.objects.filter(slug=base_slug).exclude(pk=instance.pk).exists():
-#         base_slug = f"{slugify(instance.name)}-{counter}"
-#         counter += 1
-#     instance.slug = base_slug
-
-# pre_save.connect(update_slug, sender=SubTopic)
-
-
-
-
-    
-
 class user_completed(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='user_completed_user')
     sub_topic=models.ForeignKey(SubTopic,on_delete=models.CASCADE,related_name='all_topics')
+    created_at = models.DateTimeField(auto_now_add=True)
+    
     def __str__(self):
         return f"{self.user} : {self.sub_topic.name}"
 

@@ -22,3 +22,4 @@ def is_attempted_test(test,user):
 @register.filter
 def get_all_UserQuizAttempt_per_subject(subject):
     return UserQuizAttempt.objects.filter(test__subject=subject).order_by('-percentage')
+

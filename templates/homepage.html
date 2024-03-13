@@ -38,6 +38,7 @@
             {% endfor %}
         </ul>
         </div>
+         <div>{{request.user.first_name}} {{request.user.last_name}}</div>
       </div>
     </nav>
 <div id="wrapper" class="container pt-5">
@@ -75,7 +76,7 @@
                                 <h4 class="small font-weight-bold">{{sub.name}} <span class="float-right"> {% calculate_syllabus_coverage sub request.user %}%</span>
                                 </h4>
                                 <div class="progress bg-dark-subtle mb-4">
-                                    <div class="progress-bar bg-danger bg-gradient" role="progressbar" style="width: {% calculate_syllabus_coverage sub request.user %}%" aria-valuenow="{% calculate_syllabus_coverage sub request.user %}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-danger bg-gradient" role="progressbar" style="width:{% calculate_syllabus_coverage sub request.user %}%;" aria-valuenow="{% calculate_syllabus_coverage sub request.user %}" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             {% endfor %}
                         </div>
@@ -88,12 +89,27 @@
                         </div>
                         <div class="card-body ">
                             <div class="container d-flex justify-content-center align-items-center mb-3" style="height:400px" >
-                                <canvas id="myChart"></canvas>
+                                <canvas id="overallProgressChart"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
+                
 
+            </div>
+            <div class="container">
+                <div class="row">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-success">Progress as Per Subject</h6>
+                            </div>
+                            <div class="card-body ">
+                                <div class="container d-flex justify-content-center align-items-center mb-3" style="height:400px" >
+                                    <canvas id="progressAsPerSubject"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
 
             <div class="row">
@@ -130,22 +146,81 @@
     
 </div>
 <script>
-    const ctx = document.getElementById('myChart');
+    const ctx = document.getElementById('overallProgressChart');
     let subs="{% for sub in Subjects %}{{sub.name}}|{% endfor %}".split('|')
     let syllabus_covered="{% for sub in Subjects %}{% calculate_syllabus_coverage sub request.user %}|{% endfor %}".split("|")
     subs.pop()
     syllabus_covered.pop()
-  new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: subs,
-      datasets: [{
-        label: 'Covered %',
-        data: syllabus_covered,
-        borderWidth:1
-      }]
-    },
-  });
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: subs,
+            datasets: [{
+                label: 'Covered %',
+                data: syllabus_covered,
+                borderWidth:1
+            }]
+        },
+    });
+     
+    const date_joined = parseInt("{{request.user.date_joined.month}}")
+
+    let months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+    
+    let now_months_arr=[]
+
+    //for(let i=0;i<12;i++){
+    //    now_months_arr.push(months[(i+date_joined)%12]);
+    //}
+
+    for(let i=1;i<100;i++){
+        now_months_arr.push(i%30);
+    }
+
+
+
+    
+    const progressAsPerSubject = document.getElementById('progressAsPerSubject');
+    new Chart(progressAsPerSubject, {
+        type: 'line',
+        data: {
+            labels:now_months_arr,
+            datasets:[
+                    {
+                        label: subs[0], // Label for the first line
+                        data: [0, 20, 15, 25, 30], // Data points for the first line
+                        borderColor: 'rgba(255, 99, 132, 1)', // Line color
+                        fill: false, // Don't fill area under the line
+                    },
+                    {
+                        label: subs[1], // Label for the second line
+                        data: [0, 15, 10, 20, 25], // Data points for the second line
+                        borderColor: 'rgba(75, 192, 192, 1)', // Line color
+                        fill: false, // Don't fill area under the line
+                    },
+                    {
+                        label: subs[2], // Label for the second line
+                        data: [0, 15, 10, 20, 25], // Data points for the second line
+                        borderColor: 'rgba(75, 92, 192, 1)', // Line color
+                        fill: false, // Don't fill area under the line
+                    },
+                    {
+                        label: subs[3], // Label for the second line
+                        data: [0, 15, 10, 20, 25], // Data points for the second line
+                        borderColor: 'rgba(75, 192, 12, 1)', // Line color
+                        fill: false, // Don't fill area under the line
+                    },
+                    {
+                        label: subs[4], // Label for the second line
+                        data: [0, 15, 10, 20, 25,98], // Data points for the second line
+                        borderColor: 'rgba(75, 92, 192, 1)', // Line color
+                        fill: false, // Don't fill area under the line
+                    },
+                    
+                ],
+        },
+    });
+
 </script>
 
 {% endblock body %}

@@ -11,6 +11,10 @@ from django.views.decorators.cache import cache_control
 
 @login_required
 def homepage(request):
+    completed_subtopics = user_completed.objects.filter(user=request.user).values_list('created_at',flat=True)
+    # for i in completed_subtopics:
+    #     print(i.date)
+    
     semester=Semester.objects.all()
     if 'sem_id' in request.session:
         current_sem = Semester.objects.get(id=request.session['sem_id'])
@@ -40,7 +44,7 @@ def signin(request):
 
 def signup(request):
     if request.method != "POST":
-        return render(request, "sign_in_up.html")
+        return render(request, "signup.html")
     fname = request.POST["fname"]
     lname = request.POST["lname"]
     username = request.POST["username"]
@@ -65,7 +69,7 @@ def signout(request):
 def roadmap(request, str):
     sub = Subject.objects.get(name=str)
     Topics = Topic.objects.filter(subject=sub)
-    completed_subtopics = user_completed.objects.filter(user=request.user).values_list('sub_topic_id', flat=True)
+    completed_subtopics = user_completed.objects.filter(user=request.user).values_list('sub_topic_id',flat=True)
     params = {
         "Topics": Topics,
         "completed_subtopics":completed_subtopics,
