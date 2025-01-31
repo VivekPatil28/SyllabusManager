@@ -4,21 +4,28 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse
 from .models import *
 import json
-import math
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.cache import cache_control
+import pickle
 
 @login_required
 def homepage(request):
+    completed_subtopics = user_completed.objects.filter(user=request.user).values_list('created_at',flat=True)
+    # for i in completed_subtopics:
+    #     print(i.date)
+    
     semester=Semester.objects.all()
     if 'sem_id' in request.session:
         current_sem = Semester.objects.get(id=request.session['sem_id'])
     else:
         current_sem = Semester.objects.get(id=1)
     Subjects = Subject.objects.filter(sem=current_sem)
+    check=None
+    if 'check' in request.session:
+        check = request.session['check']
     params = {
+        "is_checked": check,
         "Subjects": Subjects,
         "quote": Quote,
         "semester":semester,
@@ -35,24 +42,27 @@ def signin(request):
     user = authenticate(username=username, password=password)
     if user is not None:
         login(request, user)
-        return redirect("/")
+    else:
+        return render(request, "sign_in_up.html",{"error":"Inalid Credientials"})
+    return redirect("/")
+
 
 
 def signup(request):
     if request.method != "POST":
-        return render(request, "sign_in_up.html")
+        return render(request, "signup.html")
     fname = request.POST["fname"]
     lname = request.POST["lname"]
     username = request.POST["username"]
     password = request.POST["password"]
-    profile = request.POST.get("profile")
+    # profile = request.POST.get("profile")
     user = User.objects.create_user(
         first_name=fname, last_name=lname, username=username, password=password
     )
     user.save()
     if user is not None:
         login(request, user)
-        return redirect("/")
+    return redirect("/")
 
 
 @login_required
@@ -62,11 +72,120 @@ def signout(request):
 
 
 @login_required
+def predict_job(request):
+    user_score,is_created = UserScore.objects.get_or_create(user=request.user)
+    return render(request,"test_types.html",{"user_score":user_score})
+    
+    
+@login_required  
+def test_skills(request):
+    test_type  = dict(request.POST.items())["Submit"]
+    if(test_type == "Coding Skills"):
+        test_id = 44
+    elif(test_type == "Aptitude Skills"):
+        test_id= 45
+    elif(test_type == "Technical Skills"):
+        test_id= 46
+    elif(test_type == "Verbal Skills"):
+        test_id= 47
+    elif(test_type == "Academic Skills"):
+        return render(request,'academic_skills.html')
+    
+    test = Test.objects.get(id = test_id)
+    questions = Question.objects.filter(test=test)
+    
+    params={"questions":questions,"test_type":test_type}
+    
+    return render(request,"prediction_test.html",params)
+
+def save_academic(request):
+    if(request.method=="POST"):
+        ssc = float(request.POST["ssc"])
+        hsc = float(request.POST["hsc"])
+        degree = float(request.POST["degree"])
+        backlogs = float(request.POST["backlogs"])
+        user_score,is_created = UserScore.objects.get_or_create(user=request.user)
+        user_score.academic_skills = (ssc+hsc+degree)/3
+        user_score.backlogs = backlogs
+        user_score.save()
+        return redirect("/predict_job")
+        
+def delete_pred_data(request):
+    if(request.method=="POST"):
+        user_score = UserScore.objects.get(user=request.user)
+        user_score.delete()
+    return redirect('/')
+        
+def calc_score(request):
+    if(request.method == "POST"):
+        marks=0
+        answers={}
+        for key, value in request.POST.items():
+            if(key.startswith("csrf")):
+                pass
+            elif(key.startswith("c")):
+                answers[key[1:]]=value
+        
+        for question_id,answer_id in answers.items():
+            choice = Choice.objects.get(id = answer_id)
+            if(choice.is_correct):
+                marks+=1
+        
+        user_score,is_created = UserScore.objects.get_or_create(user=request.user)
+        
+        test_type = request.POST["test_type"]
+        if(test_type == "Coding Skills"):
+            user_score.coding_skills = (marks/15) *100
+        elif(test_type == "Aptitude Skills"):
+            user_score.aptitude_skills = (marks/15) *100
+        elif(test_type == "Technical Skills"):
+            user_score.technical_skills = (marks/15) *100
+        elif(test_type == "Verbal Skills"):
+            user_score.verbal_skills = (marks/15) *100
+        user_score.save()
+        
+        # print(user_score.coding_skills)
+        # print(user_score.technical_skills)
+        # print(user_score.verbal_skills)
+        # print(user_score.aptitude_skills)
+        return redirect("/predict_job")
+    
+
+
+def show_prediction(request):
+    params={}
+    user_score = UserScore.objects.get(user=request.user)
+    params["user_score"]=user_score
+    if(user_score == None):
+        return render(request,'show_prediction.html',{"result":"All tests Are not Completed"})
+    #model import
+    model = pickle.load (open('Model/model.pkl', 'rb')) 
+    
+    res = model.predict([[user_score.coding_skills,
+                          user_score.aptitude_skills, 
+                          user_score.technical_skills,
+                          user_score.verbal_skills,
+                          user_score.academic_skills,
+                          user_score.backlogs,
+                          ]])
+    params["result"] = res[0]
+    user_score.placement_pred=True if res[0]>70 else False
+    user_score.save()
+    
+    
+    return render(request,'show_prediction.html',params)
+    
+    
+    
+    
+    
+@login_required
 def roadmap(request, str):
     sub = Subject.objects.get(name=str)
     Topics = Topic.objects.filter(subject=sub)
-    completed_subtopics = user_completed.objects.filter(user=request.user).values_list('sub_topic_id', flat=True)
+    completed_subtopics = user_completed.objects.filter(user=request.user).values_list('sub_topic_id',flat=True)
     params = {
+        "is_checked":request.session['check'],
         "Topics": Topics,
         "completed_subtopics":completed_subtopics,
     }
@@ -106,8 +225,6 @@ def readyToStartTest(request):
         return redirect('/')
     return render(request,'readytostartTest.html',params)
 
-
-@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required
 def starttest(request):
     if request.method != "POST":
@@ -139,7 +256,7 @@ def starttest(request):
     return render(request, "test.html", params)
 
 
-@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+
 @login_required
 def showResult(request):
     if not request.session.get('test_id'):
@@ -171,6 +288,5 @@ def subtopicdesc(request, str):
 
 def changeSem(request):
     sem_id=request.POST.get('sem_id')
-    print(sem_id)
     request.session['sem_id'] = sem_id
     return redirect('/')

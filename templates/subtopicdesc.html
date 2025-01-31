@@ -20,25 +20,25 @@
         }
     
     </style>
-    <div class="container-fluid text-bg-dark">
+    <div class="container-fluid text-white" style="background-color:#343541;">
         <div class="row">
-            <div class="col-3 bg-secondary-subtle ">
+            <div class="col-3" style="background-color:#202123;">
                 <ul class="position-sticky px-4" style="top:0px;padding-top:50px;min-height:100vh;">
-                    <h4 class="text-center text-dark my-2">{{subtopic.topic.name}}</h4>
+                    <h5>{{subtopic.topic.name}}</h5>
                     {% for i in subtopic.topic.subtopic.all %}
-                    <hr class="hr  text-dark"/>
+                    <hr class="hr"/>
                         {% if subtopic.name == i.name %}
-                        <li><a href="{{i.slug}}" class="text-primary">{{i.name}}</a></li>
+                        <li><a href="{{i.slug}}" class="text-primary small">{{i.name}}</a></li>
                         {% else %}
-                            <li><a href="{{i.slug}}">{{i.name}}</a></li>
+                            <li><a href="{{i.slug}}" class="text-white small">{{i.name}}</a></li>
                         {% endif %}
                         
                     {% endfor %}
                 </ul>
             </div>
             <div class="col-9">
-                <h4 class="text-center my-5">{{subtopic.name}}</h4>
-                <h6 class="textbody mx-5" style="font-family:sans-serif,monospace;">
+                <h4 class="text-center my-5">{{subtopic.getElementsByTagName}}</h4>
+                <h6 class="textbody mx-5" style="font-family:sans-serif,monospace;color:#C1C2C7;">
                     {{subtopic.body|safe}}
                 </h6>
             </div>

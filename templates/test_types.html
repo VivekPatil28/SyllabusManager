@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block body %}
+
+<div class="d-flex justify-content-center align-items-center flex-column" style="height:100vh;">
+    <form action="/test_skills" method="post" class="d-flex flex-column">
+        {% csrf_token %}
+        <input type="submit" value="Coding Skills" name="Submit" {% if user_score.coding_skills != None %}disabled{% endif %}  class="btn btn-primary btn-lg m-4"/>
+        <input type="submit" value="Aptitude Skills" name="Submit" {% if user_score.aptitude_skills != None %}disabled{% endif %}  class="btn btn-primary btn-lg m-4"/>
+        <input type="submit" value="Technical Skills" name="Submit" {% if user_score.technical_skills != None %}disabled{% endif %}  class="btn btn-primary btn-lg m-4"/>
+        <input type="submit" value="Verbal Skills" name="Submit" {% if user_score.verbal_skills != None %}disabled{% endif %}  class="btn btn-primary btn-lg m-4"/>
+        <input type="submit" value="Academic Skills" name="Submit" {% if user_score.academic_skills != None %}disabled{% endif %}  class="btn btn-primary btn-lg m-4"/>
+    </form>
+    <form action="/show_prediction" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Show Prediction" name="Submit" {% if user_score.coding_skills == None or user_score.aptitude_skills == None or user_score.technical_skills == None or user_score.verbal_skills == None or user_score.academic_skills == None or user_score.backlogs == None %}disabled{% endif %}  class="btn btn-danger btn-lg m-4"/>
+    </form>
+    <form action="/delete_pred_data" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete Prediction Data" name="Submit" {% if user_score.coding_skills == None or user_score.aptitude_skills == None or user_score.technical_skills == None or user_score.verbal_skills == None or user_score.academic_skills == None or user_score.backlogs == None %}disabled{% endif %}  class="btn btn-danger btn-lg m-4"/>
+    </form>
+</div>
+
+{% endblock body %}

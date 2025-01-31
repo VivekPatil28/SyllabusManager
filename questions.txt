@@ -1,0 +1,127 @@
+mcq = [
+    ("What does SSAD stand for in software development?", 
+    "a) Systematic Software Analysis Design", "b) Structured System Analysis Design", "c) Software System Architecture Development", "d) Systematic Structured Analysis Design", "b"),
+    
+    ("Which phase of the System Development Life Cycle (SDLC) involves understanding user requirements?", 
+    "a) Design", "b) Testing", "c) Implementation", "d) Analysis", "d"),
+    
+    ("In SDLC, what is the primary focus of the Implementation phase?", 
+    "a) User requirements gathering", "b) System design", "c) Writing code and building the system", "d) System testing", "c"),
+    
+    ("Which SDLC model is characterized by a linear sequence of phases: requirements, design, implementation, testing, and maintenance?", 
+    "a) Waterfall Model", "b) Spiral Model", "c) Agile Model", "d) RAD Model", "a"),
+    
+    ("What is the primary advantage of the Waterfall Model?", 
+    "a) Quick adaptation to changing requirements", "b) Suitable for large projects", "c) Allows iterative development", "d) Clear and structured approach", "d"),
+    
+    ("Which SDLC model emphasizes frequent feedback and iteration?", 
+    "a) Waterfall Model", "b) Spiral Model", "c) Prototyping Model", "d) RAD Model", "b"),
+    
+    ("What is the main goal of the Prototyping Model?", 
+    "a) Sequential development", "b) Minimizing risk", "c) Quick development of a functional prototype", "d) Linear progression of phases", "c"),
+    
+    ("Which model involves developing a partial, working system and refining it based on user feedback?", 
+    "a) Waterfall Model", "b) Spiral Model", "c) RAD Model", "d) Prototyping Model", "d"),
+    
+    ("What does RAD stand for in software development?", 
+    "a) Rapid Application Design", "b) Reliable Application Development", "c) Responsive Agile Development", "d) Rapid Application Development", "d"),
+    
+    ("Which model is known for its iterative approach and focuses on risk assessment?", 
+    "a) Waterfall Model", "b) Spiral Model", "c) Prototyping Model", "d) RAD Model", "b"),
+    
+    ("Which model is characterized by a series of prototypes that are incrementally refined?", 
+    "a) Waterfall Model", "b) Spiral Model", "c) Prototyping Model", "d) RAD Model", "c"),
+    
+    ("What is the primary advantage of the Spiral Model?", 
+    "a) Predictable development timeline", "b) Suitable for small projects", "c) Reduced risk through regular assessment", "d) Quick implementation phase", "c"),
+    
+    ("What does RUP stand for in software development?", 
+    "a) Rational Unified Process", "b) Reliable User Participation", "c) Responsive Unified Plan", "d) Realistic User Process", "a"),
+    
+    ("Which development approach combines development and design techniques from both structured analysis and object-oriented analysis?", 
+    "a) SSAD", "b) OOAD", "c) SSAD and OOAD", "d) RAD", "c"),
+    
+    ("Which development approach places a strong emphasis on understanding and modeling the problem domain using objects?", 
+    "a) SSAD", "b) OOAD", "c) SDLC", "d) RAD", "b"),
+    
+    ("What is the primary goal of the Object-Oriented Analysis and Design (OOAD) approach?", 
+    "a) Quick implementation", "b) Creating detailed project plans", "c) Modeling the problem domain using objects", "d) Following a linear development sequence", "c"),
+    
+    ("Which approach is used for understanding and defining system requirements in terms of data and processes?", 
+    "a) SSAD", "b) OOAD", "c) RAD", "d) SDLC", "a"),
+    
+    ("Which approach is more suitable for large and complex systems with a focus on data and processes?", 
+    "a) SSAD", "b) OOAD", "c) RAD", "d) SDLC", "a"),
+    
+    ("Which development approach places a strong emphasis on defining system requirements in terms of objects, classes, and interactions?", 
+    "a) SSAD", "b) OOAD", "c) RAD", "d) SDLC", "b"),
+    
+    ("In OOAD, what is the primary focus of the analysis phase?", 
+    "a) Implementing classes", "b) Designing user interfaces", "c) Identifying and modeling objects and their interactions", "d) Writing code", "c"),
+    
+    ("Which approach is more suitable for projects with rapidly changing requirements?", 
+    "a) SSAD", "b) OOAD", "c) RAD", "d) SDLC", "c"),
+    
+    ("What is the main advantage of the Rational Unified Process (RUP)?", 
+    "a) Linear development process", "b) Predictable project outcomes", "c) Highly structured requirements analysis", "d) Flexible iterative development", "d"),
+
+    ("Which phase of the SDLC involves transforming system requirements into detailed specifications?", 
+    "a) Analysis", "b) Design", "c) Implementation", "d) Testing", "b"),
+    
+    ("What is the primary goal of the design phase in SSAD?", 
+    "a) Identifying system requirements", "b) Creating a functional prototype", "c) Developing detailed system specifications", "d) Writing code", "c"),
+    
+    ("Which approach focuses on identifying data and processes and representing them using structured diagrams?", 
+    "a) SSAD", "b) OOAD", "c) SDLC", "d) RAD", "a"),
+    
+    ("Which approach is more suitable for projects with well-defined and stable requirements?", 
+    "a) SSAD", "b) OOAD", "c) RAD", "d) SDLC", "a"),
+    
+    ("In which SDLC model does each phase have its own planning, design, and testing activities?", 
+    "a) Waterfall Model", "b) Spiral Model", "c) Prototyping Model", "d) RAD Model", "b"),
+    
+    ("Which model combines elements of the waterfall model and prototyping?", 
+    "a) Waterfall Model", "b) Spiral Model", "c) Prototyping Model", "d) RAD Model", "d"),
+    
+    ("What is the main purpose of the analysis phase in SSAD?", 
+    "a) Writing code", "b) Identifying user requirements", "c) Developing prototypes", "d) Designing user interfaces", "b"),
+    
+    ("Which model focuses on creating a functional prototype that can be refined based on user feedback?", 
+    "a) Waterfall Model", "b) Spiral Model", "c) Prototyping Model", "d) RAD Model", "c"),
+    
+    ("Which approach is more iterative and flexible, accommodating changes in requirements?", 
+    "a) SSAD", "b) OOAD", "c) RAD", "d) SDLC", "c"),
+    
+    ("Which approach emphasizes understanding and modeling the problem domain using objects?", 
+    "a) SSAD", "b) OOAD", "c) RAD", "d) SDLC", "b"),
+    
+    ("Which approach uses an iterative cycle of planning, analyzing, designing, and implementing?", 
+    "a) SSAD", "b) OOAD", "c) SDLC", "d) RAD", "c"),
+    
+    ("What is the main purpose of the RAD approach?", 
+    "a) Detailed requirements analysis", "b) Quick implementation of a working system", "c) Sequential development phases", "d) Emphasis on user feedback", "b"),
+    
+    ("Which model involves developing the system incrementally with a focus on reducing risk?", 
+    "a) Waterfall Model", "b) Spiral Model", "c) Prototyping Model", "d) RAD Model", "b"),
+    
+    ("What is the primary goal of the analysis phase in OOAD?", 
+    "a) Writing code", "b) Identifying user requirements", "c) Creating user interfaces", "d) Developing prototypes", "b"),
+    
+    ("Which model is characterized by a series of iterations and phases, including risk assessment?", 
+    "a) Waterfall Model", "b) Spiral Model", "c) Prototyping Model", "d) RAD Model", "b"),
+    
+    ("Which approach places a strong emphasis on understanding user needs and requirements?", 
+    "a) SSAD", "b) OOAD", "c) RAD", "d) SDLC", "a"),
+    
+    ("Which model is characterized by a linear sequence of phases without iterative cycles?", 
+    "a) Waterfall Model", "b) Spiral Model", "c) Prototyping Model", "d) RAD Model", "a"),
+    
+    ("What is the main goal of the design phase in OOAD?", 
+    "a) Identifying system requirements", "b) Creating user interfaces", "c) Developing detailed system specifications", "d) Writing code", "c"),
+    
+    ("Which model involves creating a functional prototype based on user requirements?", 
+    "a) Waterfall Model", "b) Spiral Model", "c) Prototyping Model", "d) RAD Model", "c"),
+    
+    ("What is the primary goal of the analysis phase in RAD?", 
+    "a) Developing prototypes", "b) Identifying user requirements", "c) Writing code", "d) Designing user interfaces", "b")
+]

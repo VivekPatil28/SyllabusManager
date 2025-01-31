@@ -1,4 +1,93 @@
+
 {% extends 'base.html' %}
+{% block body %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 text-center">
+            <h1>Your Quiz Results</h1>
+            <div class="result-box">
+                <div class="result-score">
+                    <h4 class="mb-0">Score</h4>
+                    <h2 class="mb-0">{{ testresult.score }}/{{ testresult.test.Test.all.count }}</h2>
+                </div>
+                <div class="result-percentage">
+                    <h4 class="mb-0">Percentage</h4>
+                    <h2 class="mb-0">{{ testresult.percentage }}%</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        {% for i in quiz_answers %}
+        <div class="row">
+            <div class="mb-3 col-11">
+                <h6 class="d-inline">Q. </h6>
+                <h6 class="d-inline">{{ i.question.question }}</h6>
+            </div>
+            <div class="col-1">
+                {% if i.is_correct %}
+                <h6 class="text-success">+1</h6>
+                {% else %}
+                <h6 class="text-danger">-1</h6>
+                {% endif %}
+            </div>
+        </div>
+        <div class="ms-1 ms-sm-5">
+            {% comment %} {% for choice in i.question.choices.all %}
+                <p class="{% if choice.is_correct and i.is_correct %}text-success{% elif not choice.is_correct and i.selected_choice.id == choice.id %}text-danger{% endif %}">
+                    {{ choice.choice }}
+                </p>
+            {% endfor %} {% endcomment %}
+                {% for choice in i.question.choices.all%}
+                    {% if choice.is_correct%}
+                    <p class="text-success">{{choice.choice}}</p>
+                    {% elif i.selected_choice.id == choice.id and not i.is_correct%}
+                    <p class="text-danger">{{choice.choice}}</p>
+                    {% else %}
+                    <p>{{choice.choice}}</p>
+                    {% endif %}
+                {% endfor %}
+            <hr class="hr">
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container text-center my-4">
+    <a href="/" class="btn btn-primary">Go to Homepage</a>
+</div>
+
+<style>
+    /* Custom styling */
+    .result-box {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 30px;
+    }
+
+    .result-score, .result-percentage {
+        text-align: center;
+    }
+
+    .result-score h1, .result-percentage h1 {
+        font-size: 36px;
+        font-weight: bold;
+        margin: 5px 0;
+    }
+
+    .hr {
+        margin-top: 15px;
+    }
+</style>
+
+{% endblock body %}
+
+{% comment %} {% extends 'base.html' %}
 {% block body %}
 <div class="container">
     <h1>{{testresult.score}}/{{testresult.test.Test.all.count}}</h1>
@@ -35,4 +124,4 @@
 </div>
 
     
-{% endblock body %}
+{% endblock body %} {% endcomment %}

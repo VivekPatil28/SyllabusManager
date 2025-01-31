@@ -16,6 +16,7 @@ class TestAdmin(admin.ModelAdmin):
 
 admin.site.register(Semester)
 admin.site.register(Quote)
+admin.site.register(UserScore)
 
 
 admin.site.register(Choice)
