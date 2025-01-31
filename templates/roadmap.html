@@ -58,7 +58,7 @@
         font-weight: 100;
         font-size: 0.9em;
         min-width: 120px;
-        color: black;
+        color: white;
 
     }
 
@@ -108,30 +108,41 @@
         right: -55.8px;
     }
 </style>
-<div class="container-fluid">
+<div class="container-fluid" style="background-color:#202123;" >
     <div class="row">
         <div class="col-md-12">
-            <div class="container-fluid">
-                <div id="content">
-                    <ul class="timeline bg-primary-subtle">
-                        <h3 class="text-center text-dark mb-3">{{Topics.1.subject}}</h3>
+            <div class="container-fluid" >
+                <div id="content" >
+                    <ul class="timeline" style="background-color:#343541;color:white;">
+                        <h3 class="text-center text-white mb-3">{{Topics.1.subject}}</h3>
                         <hr class="hr">
                         {% for topic in Topics %}
-                        <li class="event " data-time="{{topic.weightage}}%">
+                        <li class="event" data-time="{{topic.weightage}}%">
                             <div>
-                                <h3 class="mb-3 text-lg text-dark text-md-sm text-sm-xs">{{topic.name}}</h3>
+                                <h3 class="mb-3 text-lg text-primary text-md-sm text-sm-xs">{{topic.name}}</h3>
                                 <p>
                                 <ul type="square">
                                     {% for subtopic in topic.subtopic.all%}
 
                                     <li>
                                         <div class="row">
-                                            <!-- <a href="subtopic/{{subtopic.slug}}" -->
-                                            <a href="https://www.google.com/search?q={{subtopic.name}} {{Topics.1.subject}}"
-                                                class="text-lg   text-md-sm text-sm-xs mb-1 text-decoration-none subtopicname"
-                                                style="width:80%;">{{subtopic.name}}</a>
-                                            <div class="d-flex justify-content-end align-items-start checkbox-cont"
-                                                style="width:20%;">
+                                            <div class="col-11">
+                                                <h6 class="text-lg text-md-sm text-sm-xs mb-1 text-white subtopicname" style="width:80%;">{{subtopic.name}}</h6>
+                                                <div class="d-flex flex-flow-column">
+                                                    <a href="https://www.google.com/search?q={{subtopic.name}} {{Topics.1.subject}}"
+                                                        class="btn btn-success btn-sm text-decoration-none text-white me-2">
+                                                        Google
+                                                    </a>
+                                                    <a href="https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q={{subtopic.name}} {{Topics.1.subject}}&btnG="
+                                                        class="btn btn-danger btn-sm text-decoration-none text-white  me-2">
+                                                        Research Papers
+                                                    </a>
+                                                    <a href="subtopic/{{subtopic.slug}}" class="btn btn-warning btn-sm text-decoration-none text-dark">
+                                                        Faculty Notes
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-end align-items-start checkbox-cont">
                                                 <input class="form-check-input is_completed" type="checkbox" value="{{subtopic.id}}" id="checkboxNoLabel" {% if subtopic.id in completed_subtopics %}checked{% endif %}>
                                             </div>
                                         </div>

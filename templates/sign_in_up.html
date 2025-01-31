@@ -61,6 +61,7 @@
       </form>
     </div>
   </div> -->
+{% if error %}<h1>{{error}}</h1>{% endif %}
 <div class="d-flex align-items-center py-4 bg-dark-subtle" style="min-height: 100vh;">
   <main class="form-signin  m-auto bg-dark p-5 rounded-3">
     <form action="/signin" method="POST">

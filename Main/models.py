@@ -19,9 +19,6 @@ class Subject(models.Model):
     def __str__(self) -> str:
         return self.name
 
-
-
-
 class Topic(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True,related_name='topics')
     name = models.TextField(max_length=100, default="")
@@ -57,7 +54,7 @@ class user_completed(models.Model):
 
 class Test(models.Model):
     name = models.CharField(max_length=255, default="Test")
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="Subject")
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE,null=True,default=None,blank=True, related_name="Subject")
     topic = models.ForeignKey(
         Topic, on_delete=models.CASCADE, related_name="Topics", null=True, default=None,blank=True
     )
@@ -71,7 +68,17 @@ class Question(models.Model):
 
     def __str__(self):
         return self.question
-
+    
+class UserScore(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name="UserScore")
+    coding_skills=models.FloatField(null=True,blank=True)
+    aptitude_skills = models.FloatField(null=True,blank=True)
+    technical_skills=models.FloatField(null=True,blank=True)
+    verbal_skills = models.FloatField(null=True,blank=True)
+    academic_skills = models.FloatField(null=True,blank=True)
+    backlogs = models.IntegerField(null=True,blank=True)
+    placement_pred = models.BooleanField(null=True,blank=True)
+    
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE,related_name='choices')
