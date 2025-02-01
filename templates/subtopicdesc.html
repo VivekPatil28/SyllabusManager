@@ -39,7 +39,11 @@
             <div class="col-9">
                 <h4 class="text-center my-5">{{subtopic.getElementsByTagName}}</h4>
                 <h6 class="textbody mx-5" style="font-family:sans-serif,monospace;color:#C1C2C7;">
+                    {% if subtopic.body == None %}
+                        No Data Available
+                    {%else%}
                     {{subtopic.body|safe}}
+                    {% endif %}
                 </h6>
             </div>
         </div>
