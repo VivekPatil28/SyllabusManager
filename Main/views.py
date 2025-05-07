@@ -68,124 +68,18 @@ def signup(request):
 @login_required
 def signout(request):
     logout(request)
-    return render(request, "sign_in_up.html")
+    return redirect("/")
 
 
-@login_required
-def predict_job(request):
-    user_score,is_created = UserScore.objects.get_or_create(user=request.user)
-    return render(request,"test_types.html",{"user_score":user_score})
-    
-    
-@login_required  
-def test_skills(request):
-    test_type  = dict(request.POST.items())["Submit"]
-    if(test_type == "Coding Skills"):
-        test_id = 44
-    elif(test_type == "Aptitude Skills"):
-        test_id= 45
-    elif(test_type == "Technical Skills"):
-        test_id= 46
-    elif(test_type == "Verbal Skills"):
-        test_id= 47
-    elif(test_type == "Academic Skills"):
-        return render(request,'academic_skills.html')
-    
-    test = Test.objects.get(id = test_id)
-    questions = Question.objects.filter(test=test)
-    
-    params={"questions":questions,"test_type":test_type}
-    
-    return render(request,"prediction_test.html",params)
-
-def save_academic(request):
-    if(request.method=="POST"):
-        ssc = float(request.POST["ssc"])
-        hsc = float(request.POST["hsc"])
-        degree = float(request.POST["degree"])
-        backlogs = float(request.POST["backlogs"])
-        user_score,is_created = UserScore.objects.get_or_create(user=request.user)
-        user_score.academic_skills = (ssc+hsc+degree)/3
-        user_score.backlogs = backlogs
-        user_score.save()
-        return redirect("/predict_job")
-        
-def delete_pred_data(request):
-    if(request.method=="POST"):
-        user_score = UserScore.objects.get(user=request.user)
-        user_score.delete()
-    return redirect('/')
-        
-def calc_score(request):
-    if(request.method == "POST"):
-        marks=0
-        answers={}
-        for key, value in request.POST.items():
-            if(key.startswith("csrf")):
-                pass
-            elif(key.startswith("c")):
-                answers[key[1:]]=value
-        
-        for question_id,answer_id in answers.items():
-            choice = Choice.objects.get(id = answer_id)
-            if(choice.is_correct):
-                marks+=1
-        
-        user_score,is_created = UserScore.objects.get_or_create(user=request.user)
-        
-        test_type = request.POST["test_type"]
-        if(test_type == "Coding Skills"):
-            user_score.coding_skills = (marks/15) *100
-        elif(test_type == "Aptitude Skills"):
-            user_score.aptitude_skills = (marks/15) *100
-        elif(test_type == "Technical Skills"):
-            user_score.technical_skills = (marks/15) *100
-        elif(test_type == "Verbal Skills"):
-            user_score.verbal_skills = (marks/15) *100
-        user_score.save()
-        
-        # print(user_score.coding_skills)
-        # print(user_score.technical_skills)
-        # print(user_score.verbal_skills)
-        # print(user_score.aptitude_skills)
-        return redirect("/predict_job")
-    
-
-
-def show_prediction(request):
-    params={}
-    user_score = UserScore.objects.get(user=request.user)
-    params["user_score"]=user_score
-    if(user_score == None):
-        return render(request,'show_prediction.html',{"result":"All tests Are not Completed"})
-    #model import
-    model = pickle.load (open('Model/model.pkl', 'rb')) 
-    
-    res = model.predict([[user_score.coding_skills,
-                          user_score.aptitude_skills, 
-                          user_score.technical_skills,
-                          user_score.verbal_skills,
-                          user_score.academic_skills,
-                          user_score.backlogs,
-                          ]])
-    params["result"] = res[0]
-    user_score.placement_pred=True if res[0]>70 else False
-    user_score.save()
-    
-    
-    return render(request,'show_prediction.html',params)
-    
-    
-    
-    
     
 @login_required
 def roadmap(request, str):
     sub = Subject.objects.get(name=str)
     Topics = Topic.objects.filter(subject=sub)
+    is_checked =  request.session['check'] if 'check' in request.session else None
     completed_subtopics = user_completed.objects.filter(user=request.user).values_list('sub_topic_id',flat=True)
     params = {
-        "is_checked":request.session['check'],
+        "is_checked":is_checked,
         "Topics": Topics,
         "completed_subtopics":completed_subtopics,
     }

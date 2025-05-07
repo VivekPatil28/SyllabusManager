@@ -2,9 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 import random
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
-from django.utils.text import slugify
 
 
 class Semester(models.Model):
@@ -68,18 +65,8 @@ class Question(models.Model):
 
     def __str__(self):
         return self.question
-    
-class UserScore(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name="UserScore")
-    coding_skills=models.FloatField(null=True,blank=True)
-    aptitude_skills = models.FloatField(null=True,blank=True)
-    technical_skills=models.FloatField(null=True,blank=True)
-    verbal_skills = models.FloatField(null=True,blank=True)
-    academic_skills = models.FloatField(null=True,blank=True)
-    backlogs = models.IntegerField(null=True,blank=True)
-    placement_pred = models.BooleanField(null=True,blank=True)
-    
-
+ 
+ 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE,related_name='choices')
     choice = models.CharField(max_length=500)
